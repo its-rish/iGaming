@@ -1,0 +1,14 @@
+// Example Strapi API response for /api/blogs
+// {
+//   "data": [
+//     {
+//       "id": 2,
+//       "documentId": "exsa67l9ltwjd4ilkkrraukf",
+//       "title": "Why Learning Web Development in 2025 Is More Important Than Ever",
+//       "content": [
+//         {"type": "paragraph", "children": [{"type": "text", "text": "Intro text..."}]}
+//       ]
+//     }
+//   ]
+// }
+// The blog object does NOT have an 'attributes' field, but has 'title' and 'content' at the root.
