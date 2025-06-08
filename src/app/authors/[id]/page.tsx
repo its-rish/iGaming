@@ -22,10 +22,14 @@ function getAuthorImage(author: any): string {
   if ('imageUrl' in author && author.imageUrl) return author.imageUrl;
   return 'https://picsum.photos/300/300';
 }
+interface PageProps {
+  params: Promise<{ id: string }>
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>
+}
 
 // Generate dynamic metadata
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-  const id = params.id;
+export async function generateMetadata({ params }: PageProps) {
+  const { id } = await params;
   const res = await fetch(`http://localhost:1337/api/authors/${id}`);
   if (!res.ok) {
     return {
@@ -50,8 +54,8 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   };
 }
 
-export default async function AuthorDetailPage({ params }: { params: { id: string } }) {
-  const id = params.id;
+export default async function AuthorDetailPage({ params }: PageProps) {
+  const { id } = await params;
   // Fetch author
   const res = await fetch(`http://localhost:1337/api/authors/${id}`);
   if (!res.ok) return notFound();

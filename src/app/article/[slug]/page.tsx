@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import Footer from '@/components/Footer';
 import { Metadata } from 'next';
 import Image from 'next/image';
@@ -124,14 +124,12 @@ function formatDate(date: string | Date): string {
 }
 
 // Helper to render content blocks
-function renderContent(content: Block[]): JSX.Element[] {
+function renderContent(content: Block[]): ReactElement[] {
   return content.map((block, idx) => {
     if (typeof block === 'string') {
-      // Handle HTML string (from static data)
       return <div key={idx} dangerouslySetInnerHTML={{ __html: block }} />;
     }
     
-    // Handle Strapi blocks
     if (block.type === 'paragraph' && Array.isArray(block.children)) {
       return (
         <p key={idx} className="mb-4 text-white">
@@ -140,11 +138,15 @@ function renderContent(content: Block[]): JSX.Element[] {
       );
     }
     return null;
-  }).filter(Boolean);
+  }).filter(Boolean) as ReactElement[];
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const slug = params.slug;
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: Promise<{ slug: string }> 
+}) {
+  const { slug } = await params
 
   try {
     // Try to fetch from Strapi first
@@ -184,8 +186,12 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 }
 
-export default async function ArticlePage({ params }: { params: { slug: string } }) {
-  const slug = params.slug;
+export default async function ArticlePage({ 
+  params 
+}: { 
+  params: Promise<{ slug: string }> 
+}) {
+  const { slug } = await params
 
   try {
     // Try to fetch from Strapi first

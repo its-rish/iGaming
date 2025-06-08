@@ -17,9 +17,14 @@ function getCategoryColor(category: string) {
     default: return 'text-red-500';
   }
 }
+interface PageProps {
+  params: Promise<{ category: string }>
+}
 
-export async function generateMetadata({ params }: { params: { category: string } }): Promise<Metadata> {
-  const category = params.category;
+export async function generateMetadata({ 
+  params 
+}: PageProps): Promise<Metadata> {
+  const { category } = await params;
   const categoryName = category.charAt(0).toUpperCase() + category.slice(1);
   return {
     title: `${categoryName} - Framagz`,
@@ -28,8 +33,8 @@ export async function generateMetadata({ params }: { params: { category: string 
   };
 }
 
-export default async function CategoryPage({ params }: { params: { category: string } }) {
-  const category = params.category;
+export default async function CategoryPage({ params }: PageProps) {
+  const { category } = await params;
   // Fetch articles by category
   const res = await fetch(`http://localhost:1337/api/articles?filters[category][name][$eq]=${category}&populate=author,category`);
   const data = await res.json();
