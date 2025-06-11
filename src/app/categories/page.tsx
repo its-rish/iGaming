@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 async function getCategoryArticles(category: string) {
-  const res = await fetch(`http://localhost:1337/api/articles?filters[category][name][$eq]=${category}&populate=author,category`);
+  const res = await fetch(`https://capable-fellowship-a7bdacc8df.strapiapp.com/api/articles?filters[category][name][$eq]=${category}&populate=author,category`);
   if (!res.ok) return [];
   const data = await res.json();
   return (data.data || []).map((a: any) => {

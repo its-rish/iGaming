@@ -26,6 +26,7 @@ interface StrapiArticle {
 interface ArticleUI {
   id: number;
   title: string;
+  slug: string;
   category: string;
   date: string;
   imageUrl: string;
@@ -74,7 +75,7 @@ const NewsSection = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('http://localhost:1337/api/articles')
+    fetch('https://capable-fellowship-a7bdacc8df.strapiapp.com/api/articles?populate=*')
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -88,23 +89,25 @@ const NewsSection = () => {
   }, []);
 
   // Map Strapi data to UI format
-  const mapArticle = (article: StrapiArticle): ArticleUI => {
-    const attr = article.attributes || (article as any);
-    return {
-      id: article.id,
-      title: attr.title,
-      category: getCategoryName(attr.category),
-      date: attr.date || attr.publishedAt || '',
-      imageUrl: attr.imageUrl || attr.cover?.url || 'https://picsum.photos/800/400',
-      link: attr.slug ? `/article/${attr.slug}` : `/article/${article.id}`,
-      author: getAuthorName(attr.author),
-      raw: article,
-    };
+const mapArticle = (article: StrapiArticle): ArticleUI => {
+  const attr = article.attributes || (article as any);
+  return {
+    id: article.id,
+    title: attr.title,
+    slug: attr.slug || '', // <-- Add this
+    category: getCategoryName(attr.category),
+    date: attr.date || attr.publishedAt || '',
+    imageUrl: attr.imageUrl || attr.cover?.url || 'https://picsum.photos/800/400',
+    link: `/article/${attr.slug || article.id}`, // <-- Updated to use slug
+    author: getAuthorName(attr.author),
+    raw: article,
   };
+};
+
 
   // Filter for sections
   const happeningToday: ArticleUI[] = articles.slice(0, 5).map(mapArticle);
-  const staffPicks: ArticleUI[] = articles.slice(5, 8).map(mapArticle);
+  const staffPicks: ArticleUI[] = articles.slice(0, 8).map(mapArticle);
   const technologyPosts: ArticleUI[] = articles.filter((a) => getCategoryName(a.attributes?.category).toLowerCase() === 'technology').map(mapArticle);
   const businessPosts: ArticleUI[] = articles.filter((a) => getCategoryName(a.attributes?.category).toLowerCase() === 'business').map(mapArticle);
   const healthPosts: ArticleUI[] = articles.filter((a) => getCategoryName(a.attributes?.category).toLowerCase() === 'health').map(mapArticle);
@@ -114,7 +117,7 @@ const NewsSection = () => {
 
   // News Article Card Component
   const NewsArticleCard = ({ article }: { article: ArticleUI }) => (
-    <Link href={article.link} className="block group pb-6 mb-6 border-b border-gray-700">
+    <Link href={ article.link} className="block group pb-6 mb-6 border-b border-gray-700">
       {/* Desktop layout (side by side) */}
       <div className="hidden md:flex">
         <div className="w-1/2">

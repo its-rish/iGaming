@@ -188,7 +188,7 @@ const NewsPageSection = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await fetch('http://localhost:1337/api/articles?populate=author,category');
+        const res = await fetch('https://capable-fellowship-a7bdacc8df.strapiapp.com/api/articles?populate=author,category');
         const data = await res.json();
         const mapped = (data.data || []).map((article: StrapiArticle) => {
           const attr = article.attributes;

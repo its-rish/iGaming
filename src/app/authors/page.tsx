@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 async function getAuthors() {
-  const res = await fetch('http://localhost:1337/api/authors');
+  const res = await fetch('https://capable-fellowship-a7bdacc8df.strapiapp.com/api/authors');
   if (!res.ok) return [];
   const data = await res.json();
   return data.data || [];

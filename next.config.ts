@@ -22,6 +22,11 @@ const nextConfig: NextConfig = {
         port: "",
         pathname: "/photo-**",
       },
+        {
+        protocol: 'https',
+        hostname: 'capable-fellowship-a7bdacc8df.media.strapiapp.com',
+        pathname: '/**',
+      },
     ],
   },
 };

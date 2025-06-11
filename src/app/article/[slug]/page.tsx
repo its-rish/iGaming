@@ -150,7 +150,7 @@ export async function generateMetadata({
 
   try {
     // Try to fetch from Strapi first
-    const res = await fetch(`http://localhost:1337/api/articles?filters[slug][$eq]=${slug}&populate[author][populate]=image`);
+    const res = await fetch(`https://capable-fellowship-a7bdacc8df.strapiapp.com/api/articles?filters[slug][$eq]=${slug}&populate[author][populate]=image`);
     const data = await res.json();
     const article = data.data?.[0];
 
@@ -195,7 +195,7 @@ export default async function ArticlePage({
 
   try {
     // Try to fetch from Strapi first
-    const res = await fetch(`http://localhost:1337/api/articles?filters[slug][$eq]=${slug}&populate=*`, {
+    const res = await fetch(`https://capable-fellowship-a7bdacc8df.strapiapp.com/api/articles?filters[slug][$eq]=${slug}&populate=*`, {
       next: { revalidate: 3600 } // Cache for 1 hour
     });
     

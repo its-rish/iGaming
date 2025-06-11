@@ -30,7 +30,7 @@ interface PageProps {
 // Generate dynamic metadata
 export async function generateMetadata({ params }: PageProps) {
   const { id } = await params;
-  const res = await fetch(`http://localhost:1337/api/authors/${id}`);
+  const res = await fetch(`https://capable-fellowship-a7bdacc8df.strapiapp.com/api/authors/${id}`);
   if (!res.ok) {
     return {
       title: 'Author Profile - Framagz',
@@ -57,13 +57,13 @@ export async function generateMetadata({ params }: PageProps) {
 export default async function AuthorDetailPage({ params }: PageProps) {
   const { id } = await params;
   // Fetch author
-  const res = await fetch(`http://localhost:1337/api/authors/${id}`);
+  const res = await fetch(`https://capable-fellowship-a7bdacc8df.strapiapp.com/api/authors/${id}`);
   if (!res.ok) return notFound();
   const data = await res.json();
   const author = data.data;
   if (!author) return notFound();
   // Fetch articles by this author
-  const articlesRes = await fetch(`http://localhost:1337/api/articles?filters[author][id]=${id}`);
+  const articlesRes = await fetch(`https://capable-fellowship-a7bdacc8df.strapiapp.com/api/articles?filters[author][id]=${id}`);
   const articlesData = await articlesRes.json();
   const authorArticles = (articlesData.data || []).map((a: any) => {
     const attr = a.attributes;

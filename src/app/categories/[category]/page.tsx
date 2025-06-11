@@ -36,7 +36,7 @@ export async function generateMetadata({
 export default async function CategoryPage({ params }: PageProps) {
   const { category } = await params;
   // Fetch articles by category
-  const res = await fetch(`http://localhost:1337/api/articles?filters[category][name][$eq]=${category}&populate=author,category`);
+  const res = await fetch(`https://capable-fellowship-a7bdacc8df.strapiapp.com/api/articles?filters[category][name][$eq]=${category}&populate=author,category`);
   const data = await res.json();
   const articles = (data.data || []).map((a: any) => {
     const attr = a.attributes;

@@ -7,7 +7,7 @@ const StrapiBlogDemo: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:1337/api/articles?populate=author,category')
+    fetch('https://capable-fellowship-a7bdacc8df.strapiapp.com/api/articles?populate=author,category')
       .then((res) => res.json())
       .then((data) => {
         setBlogs(data.data || []);
