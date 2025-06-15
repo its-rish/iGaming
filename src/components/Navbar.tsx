@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import Logo from './Logo';
 
 const Navbar = () => {
   return (
@@ -13,14 +14,9 @@ const Navbar = () => {
           {/* Logo as first item */}
           <Link href="/" className="bg-black text-white flex items-center justify-center py-2 md:py-3 px-3 md:w-auto md:flex-1">
             <div className="relative h-10 md:h-12 w-auto">
-              <Image
-                src="/logo.png"
-                alt="Framagz Logo"
-                width={160}
-                height={48}
-                priority
-                className="object-contain h-full w-auto"
-              />
+              <figure  className="object-contain h-full w-auto leading-0">
+                <Logo/>
+              </figure>
             </div>
           </Link>
 

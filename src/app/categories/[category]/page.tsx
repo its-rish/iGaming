@@ -18,7 +18,8 @@ function getCategoryColor(category: string) {
   }
 }
 interface PageProps {
-  params: { category: string }
+  params: Promise<{ category: string }>
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
 export async function generateMetadata({ 

@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import Logo from './Logo';
 
 const Footer = () => {
   return (
@@ -29,13 +30,12 @@ const Footer = () => {
           {/* About Section - Left Side */}
           <div className="md:col-span-3">
             <div className="mb-4">
-              <Image
-                src="/logo.png"
-                alt="Framagz Logo"
-                width={150}
-                height={40}
-                className="object-contain mb-4"
-              />
+              <figure
+               
+                className="object-contain mb-4 leading-0 h-20"
+            >
+              <Logo/>
+            </figure>
             </div>
             <p className="text-white text-md font-inter">
               Framagz is a cutting-edge Framer template designed for digital news platforms, blogs, and online magazines.

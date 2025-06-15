@@ -39,32 +39,39 @@ body {
 .editor{
   h1,h2,h3,h4,h5,h6{
       font-family: var(--font-anton);
+       font-weight: var(--font-weight-medium);
 
   }
   h1{
       font-size: var(--text-3xl);
-      font-weight: var(--font-weight-bold);
+     
       margin: 0 0 2rem 0;
     
   }
    h2{
-      font-size:2.5rem;
+     font-size: var(--text-2xl);
+       margin-top: 1rem;
   }
    h3{
-      font-size:2rem;
+     font-size: var(--text-base);
+       margin-top: 1rem;
   }
   h4{
-       font-size:1.8rem;
+         font-size: var(--text-base);
+           margin-top: 1rem;
   }
     h5{
-       font-size:1.2rem;
+       font-size: var(--text-base);
+         margin-top: 1rem;
   }
    h6{
-       font-size:1rem;
+          font-size: var(--text-base);
+            margin-top: 1rem;
   }
   p{
-    font-size: 1rem;
+        font-size: var(--text-base);
       font-family: var(--font-inter);
+      margin-top: 1rem;
   }
   ul,ol{
     padding: 1rem 2rem;
@@ -76,5 +83,16 @@ body {
   ol li{
       list-style-type:disc;
       padding: 0.5rem 0;
+  }
+  blockquote{
+    border-left: 4px;
+    border-style: solid;
+    border-color: var(--color-gray-500);
+    font-style: italic;
+    padding-left: 16px;
+    color: var(--color-gray-300);
+    margin: 2rem 0;
+      font-family: var(--font-inter);
+
   }
 }

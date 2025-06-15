@@ -2,7 +2,7 @@
 
 import React, { ReactElement } from "react";
 import Footer from "@/components/Footer";
-import { Metadata } from "next";
+import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -52,32 +52,6 @@ type FeaturedPost = {
   link: string;
 };
 
-// Sample static data for fallback and testing
-// const sampleArticles = [
-//   {
-//     id: 1,
-//     slug: "1",
-//     title: "Scandal Erupts After Allegations of Doping in International Athletics",
-//     category: "SPORT",
-//     date: "MONDAY, DECEMBER 9, 2024",
-//     imageUrl: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-//     author: {
-//       name: "Jony Kurniawan",
-//       imageUrl: "https://picsum.photos/id/1012/300/300"
-//     },
-//     content: [
-//       {
-//         type: 'paragraph',
-//         children: [{ text: 'The world of international athletics was rocked today by explosive allegations of widespread doping among elite competitors. According to documents leaked to major news outlets, several high-profile athletes from multiple countries have been implicated in what appears to be a sophisticated doping program.' }]
-//       },
-//       {
-//         type: 'paragraph',
-//         children: [{ text: 'The International Athletics Federation (IAF) has announced an immediate investigation into the claims, which suggest that certain athletes may have been using performance-enhancing substances that are currently undetectable by standard testing protocols.' }]
-//       }
-//       // Add more content blocks as needed
-//     ]
-//   }
-// ];
 
 // Sample related posts
 const sampleRelatedPosts = [
@@ -155,12 +129,10 @@ function renderContent(content: Block[]): ReactElement[] {
     .filter(Boolean) as ReactElement[];
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const { slug } = params;
+export async function generateMetadata({ params }: PageProps,
+  parent: ResolvingMetadata
+): Promise<Metadata>  {
+  const { slug } =await params;
 
   try {
     // Try to fetch from Strapi first
@@ -170,24 +142,7 @@ export async function generateMetadata({
     const data = await res.json();
     const article = data.data?.[0];
 
-    // if (article) {
-    //   const attr = article.attributes ?? {};
-    //   return {
-    //     title: `${attr.title || 'Untitled'} - Framagz`,
-    //     description: attr.excerpt || attr.title || 'No description available.',
-    //     keywords: `${(attr.title || 'article').toLowerCase()}, news, articles`,
-    //   };
-    // }
-
-    // Fallback to static data
-    // const staticArticle = sampleArticles.find(article => article.slug === slug);
-    // if (staticArticle) {
-    //   return {
-    //     title: `${staticArticle.title} - Framagz`,
-    //     description: `Read about ${staticArticle.title} and stay updated with the latest news.`,
-    //     keywords: `${staticArticle.category.toLowerCase()}, news, articles, ${staticArticle.title.toLowerCase()}`,
-    //   };
-    // }
+   
 
     return {
       title: "Article Not Found - Framagz",
@@ -203,13 +158,12 @@ export async function generateMetadata({
 }
 
 interface PageProps {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }>
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
 export default async function ArticlePage({ params }: PageProps){
-  const { slug } = params;
+  const { slug } = await params;
 
   try {
     // Try to fetch from Strapi first
@@ -231,9 +185,7 @@ export default async function ArticlePage({ params }: PageProps){
     const isStatic = !strapiArticle;
     const article = strapiArticle || "";
 
-
-   
-
+  
     if (!article) return notFound();
 
     const attr = strapiArticle.attributes || (article as any);
