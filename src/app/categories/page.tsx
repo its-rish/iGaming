@@ -6,6 +6,7 @@ import TechnologySection from '@/components/TechnologySection';
 import TopContributors from '@/components/TopContributors';
 import Newsletter from '@/components/Newsletter';
 import SocialMediaLinks from '@/components/SocialMediaLinks';
+import StafsPick from '@/components/StafsPick';
 
 export const metadata: Metadata = {
   title: 'News - Framagz',
@@ -14,27 +15,41 @@ export const metadata: Metadata = {
 };
 
 async function getCategoryArticles(category: string) {
-  const res = await fetch(`https://capable-fellowship-a7bdacc8df.strapiapp.com/api/articles?filters[category][name][$eq]=${category}&populate=author,category`);
+  const res = await fetch(
+    `https://capable-fellowship-a7bdacc8df.strapiapp.com/api/articles?filters[category][name][$eq]=${category}&populate=*`
+  );
+
   if (!res.ok) return [];
+
   const data = await res.json();
-  return (data.data || []).map((a: any) => {
-    const attr = a.attributes;
+
+  return (data.data || []).map((article: any) => {
+    const imageUrl =
+      article.imageUrl?.url ||
+      article.cover?.url ||
+      'https://picsum.photos/800/400';
+
     return {
-      id: a.id,
-      title: attr.title,
-      date: attr.date || attr.publishedAt || '',
-      imageUrl: attr.imageUrl || attr.cover?.url || 'https://picsum.photos/800/400',
-      link: `/article/${a.id}`,
+      id: article.id,
+      title: article.title,
+      date: article.date || article.publishedAt || '',
+      imageUrl: imageUrl.startsWith('http')
+        ? imageUrl
+        : `https://capable-fellowship-a7bdacc8df.media.strapiapp.com${imageUrl}`,
+      link: `/article/${article.slug }`,
     };
   });
 }
 
+
 export default async function CategoryPage() {
   // Fetch articles for each section
-  const [technologyPosts, businessPosts, healthPosts] = await Promise.all([
+  const [technologyPosts, businessPosts,sportsPost,ShowbizPosts,lifeStylePosts] = await Promise.all([
     getCategoryArticles('technology'),
     getCategoryArticles('business'),
-    getCategoryArticles('health'),
+    getCategoryArticles('sport'),
+    getCategoryArticles('showbiz'),
+    getCategoryArticles('lifestyle')
   ]);
   const todaysUpdateText = "CATEGORIES";
   const bgColor = "#B7386F";
@@ -47,17 +62,24 @@ export default async function CategoryPage() {
           <div className="w-full lg:w-2/3 pt-12 px-4">
             <div className="md:pl-6">
               <TechnologySection
-                title="What's Hot In Technology"
+                title="Technology"
                 posts={technologyPosts}
               />
-              <TechnologySection
-                title="Business Insights"
-                posts={businessPosts}
+               <TechnologySection
+                title="Sports"
+                posts={sportsPost}
               />
               <TechnologySection
-                title="Health & Wellness"
-                posts={healthPosts}
-                noBorder={true}
+                title="Business"
+                posts={businessPosts}
+              />
+                <TechnologySection
+                title="Showbiz"
+                posts={ShowbizPosts}
+              />
+              <TechnologySection
+                title="Lifestyle"
+                posts={lifeStylePosts}
               />
             </div>
           </div>
@@ -69,7 +91,7 @@ export default async function CategoryPage() {
                 <h3 className="text-5xl sm:text-3xl md:text-3xl lg:text-5xl mb-4 sm:mb-6 uppercase font-anton">Staff Picks</h3>
                 {/* You can fetch staff picks from Strapi if needed */}
                 <div className="space-y-4">
-                  {/* ...existing code for staff picks... */}
+                 <StafsPick />
                 </div>
               </div>
               <TopContributors />

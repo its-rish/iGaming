@@ -11,7 +11,6 @@ const StrapiBlogDemo: React.FC = () => {
       .then((res) => res.json())
       .then((data) => {
         setBlogs(data.data || []);
-        console.log(data.data);
         setLoading(false);
       });
   }, []);

@@ -18,7 +18,7 @@ function getCategoryColor(category: string) {
   }
 }
 interface PageProps {
-  params: Promise<{ category: string }>
+  params: { category: string }
 }
 
 export async function generateMetadata({ 
@@ -36,19 +36,29 @@ export async function generateMetadata({
 export default async function CategoryPage({ params }: PageProps) {
   const { category } = await params;
   // Fetch articles by category
-  const res = await fetch(`https://capable-fellowship-a7bdacc8df.strapiapp.com/api/articles?filters[category][name][$eq]=${category}&populate=author,category`);
+  const res = await fetch(`https://capable-fellowship-a7bdacc8df.strapiapp.com/api/articles?filters[category][name][$eq]=${category}&populate=*`);
   const data = await res.json();
-  const articles = (data.data || []).map((a: any) => {
-    const attr = a.attributes;
+
+
+const articles = (data.data || []).map((article: any) => {
+    const imageUrl =
+      article.imageUrl?.url ||
+      article.cover?.url ||
+      'https://picsum.photos/800/400';
+
     return {
-      id: a.id,
-      title: attr.title,
-      category: attr.category?.data?.attributes?.name || 'Uncategorized',
-      date: attr.date || attr.publishedAt || '',
-      imageUrl: attr.imageUrl || attr.cover?.url || 'https://picsum.photos/800/400',
-      link: `/article/${a.id}`,
+      id: article.id,
+      title: article.title,
+      date: article.date || article.publishedAt || '',
+    category: article.category?.name || 'Unknown',
+      imageUrl: imageUrl.startsWith('http')
+        ? imageUrl
+        : `https://capable-fellowship-a7bdacc8df.media.strapiapp.com${imageUrl}`,
+      link: `/article/${article.slug }`,
     };
   });
+
+  
   // Format category name for display
   const categoryName = category.charAt(0).toUpperCase() + category.slice(1);
   const categoryColorClass = getCategoryColor(category);

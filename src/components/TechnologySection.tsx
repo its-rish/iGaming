@@ -19,11 +19,15 @@ interface TechnologySectionProps {
 }
 
 const TechnologySection: React.FC<TechnologySectionProps> = ({ title, posts, noBorder = false }) => {
+
   // Function to determine the category slug based on the section title
   const getCategorySlug = () => {
     if (title.toLowerCase().includes('technology')) return 'technology';
     if (title.toLowerCase().includes('business')) return 'business';
-    if (title.toLowerCase().includes('health')) return 'health';
+    if (title.toLowerCase().includes('lifestyle')) return 'lifestyle';
+    if (title.toLowerCase().includes('sport')) return 'sport';
+    if (title.toLowerCase().includes('showbiz')) return 'showbiz';
+
     return 'technology'; // Default fallback
   };
 

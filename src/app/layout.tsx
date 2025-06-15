@@ -1,8 +1,10 @@
-import type { Metadata } from "next";
+
 import { Geist, Geist_Mono, Inter, Anton } from "next/font/google";
 import "./globals.css";
 import { metadata as baseMetadata } from "./shared-metadata";
 import Navbar from "@/components/Navbar";
+import type { Metadata } from "next";
+import { CustomApolloProvider } from "@/lib/CustomApolloProvider";
 
 
 const geistSans = Geist({
@@ -44,7 +46,9 @@ export default function RootLayout({
       >
         <Navbar />
         <main>
+          <CustomApolloProvider>
           {children}
+          </CustomApolloProvider>
         </main>
       </body>
     </html>
