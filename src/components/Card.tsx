@@ -9,7 +9,6 @@ interface CardProps {
   imageUrl: string;
   link: string;
 }
-
 const Card = ({ title, category, imageUrl, link }: CardProps) => {
   // Determine category color
   const getCategoryColor = (category: string) => {
