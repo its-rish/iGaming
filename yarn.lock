@@ -426,11 +426,6 @@ source-map-js@^1.0.2, source-map-js@^1.2.1:
   resolved "https://registry.npmjs.org/source-map-js/-/source-map-js-1.2.1.tgz"
   integrity sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==
 
-strapi-plugin-populate-deep@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.npmjs.org/strapi-plugin-populate-deep/-/strapi-plugin-populate-deep-3.0.1.tgz"
-  integrity sha512-7t1bPPBN1AGKZlFT/6qsqmwgd7SzTA9CNzEBSzeYEjL/e0GKD2lf4wF11C2vMkfsQW2GhRAXZQRCGlLnV2XHFQ==
-
 streamsearch@^1.1.0:
   version "1.1.0"
   resolved "https://registry.npmjs.org/streamsearch/-/streamsearch-1.1.0.tgz"
