@@ -23,7 +23,7 @@ export default function About() {
 
       <div>
         <Image
-          src="https://framerusercontent.com/images/2yOyHgSFXxalpvLcLJ8KuPRnwHw.jpg?scale-down-to=2048"
+          src="https://capable-fellowship-a7bdacc8df.media.strapiapp.com/about_Banner_48f95b241b.jpg"
           alt="About Banner"
           width={1200}
           height={400}
@@ -176,41 +176,7 @@ export default function About() {
               </div>
             </div>
 
-            {/* Team Member 2 */}
-            <div className="relative">
-              <div className="relative h-[350px] w-full overflow-hidden">
-                <Image
-                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3"
-                  alt="Elissa Medina"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  className="object-cover"
-                  style={{ backgroundColor: "#A5D8E6" }}
-                />
-              </div>
-              <div className="text-center py-4">
-                <h3 className="text-white text-xl font-semibold">Elissa Medina</h3>
-                <p className="text-gray-400 text-sm uppercase tracking-wider">NEWS EDITOR</p>
-              </div>
-            </div>
-
-            {/* Team Member 3 */}
-            <div className="relative">
-              <div className="relative h-[350px] w-full overflow-hidden">
-                <Image
-                  src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3"
-                  alt="Jony Kurniawan"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  className="object-cover"
-                  style={{ backgroundColor: "#FF9966" }}
-                />
-              </div>
-              <div className="text-center py-4">
-                <h3 className="text-white text-xl font-semibold">Jony Kurniawan</h3>
-                <p className="text-gray-400 text-sm uppercase tracking-wider">NEWS EDITOR</p>
-              </div>
-            </div>
+          
           </div>
         </div>
       </div>

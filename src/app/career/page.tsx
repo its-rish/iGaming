@@ -15,7 +15,7 @@ const career = () => {
 
       <div>
         <Image
-          src="https://framerusercontent.com/images/2yOyHgSFXxalpvLcLJ8KuPRnwHw.jpg?scale-down-to=2048"
+          src="https://capable-fellowship-a7bdacc8df.media.strapiapp.com/about_Banner_48f95b241b.jpg"
           alt="About Banner"
           width={1200}
           height={400}

@@ -4,6 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
+
 interface TechnologyPost {
   id: number;
   title: string;
@@ -16,6 +17,22 @@ interface TechnologySectionProps {
   title: string;
   posts: TechnologyPost[];
   noBorder?: boolean;
+}
+
+function formatDate(date: string | Date): string {
+  try {
+    const dateObj = typeof date === "string" ? new Date(date) : date;
+    return dateObj
+      .toLocaleDateString("en-US", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+      .toUpperCase();
+  } catch (e) {
+    return "";
+  }
 }
 
 const TechnologySection: React.FC<TechnologySectionProps> = ({ title, posts, noBorder = false }) => {
@@ -44,14 +61,21 @@ const TechnologySection: React.FC<TechnologySectionProps> = ({ title, posts, noB
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {posts.map((post, index) => (
-          <div
+        {posts.map((post, index) => {
+  const date = post.date
+      ? post.date
+        ? formatDate(post.date)
+        : ""
+      :  "";
+
+          return(
+             <div
             key={post.id}
             className={`${
               index < posts.length - 1 ? 'md:border-r border-gray-700 md:pr-6' : ''
             } mb-6 md:mb-0`}
           >
-            <Link href={`/article/${post.id}`}>
+            <Link href={`${post.link}`}>
               <div className="relative w-full h-48 mb-3">
                 <Image
                   src={post.imageUrl}
@@ -62,12 +86,13 @@ const TechnologySection: React.FC<TechnologySectionProps> = ({ title, posts, noB
                 />
               </div>
               <div className="mt-2">
-                <p className="text-gray-400 text-xs md:text-xs uppercase mb-1 md:mb-2 font-inter">{post.date}</p>
+                <p className="text-gray-400 text-xs md:text-xs uppercase mb-1 md:mb-2 font-inter">{date}</p>
                 <h3 className="text-white text-lg md:text-xl font-anton">{post.title}</h3>
               </div>
             </Link>
           </div>
-        ))}
+          )
+        })}
       </div>
     </div>
   );
