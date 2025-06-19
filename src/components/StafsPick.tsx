@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { ArticleUI, getCategoryColor, StrapiArticle } from "./NewsSection";
 import Link from "next/link";
 import Image from "next/image";
+import StafsPickSkeletonCard from "./Skeleton/StafsPickSkeletonCard";
 
 // Helper to extract category name
 function getCategoryName(category: any): string {
@@ -113,9 +114,15 @@ function StafsPick() {
   const staffPicks: ArticleUI[] = articles.slice(0, 8).map(mapArticle);
   return (
     <>
-      {staffPicks.map((pick) => (
-        <StaffPickCard key={pick.id} pick={pick} />
-      ))}
+      {loading ? (
+        <div className="flex flex-col gap-1.5">
+          {Array.from({ length: 5 }).map((_, index: number) => (
+            <StafsPickSkeletonCard key={index} />
+          ))}
+        </div>
+      ) : (
+        staffPicks.map((pick) => <StaffPickCard key={pick.id} pick={pick} />)
+      )}
     </>
   );
 }

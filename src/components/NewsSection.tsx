@@ -8,6 +8,9 @@ import Newsletter from "./Newsletter";
 import TopContributors from "./TopContributors";
 import SocialMediaLinks from "./SocialMediaLinks";
 import { gql } from "@apollo/client";
+import NewsArticleCardSkeleton from "./Skeleton/NewsArticleCard";
+import TechnologySectionSkeleton from "./Skeleton/TechnologySectionSkeleton";
+import StafsPickSkeletonCard from "./Skeleton/StafsPickSkeletonCard";
 
 // TypeScript interfaces for article data
 export interface StrapiArticle {
@@ -100,7 +103,6 @@ const NewsSection = () => {
     };
   };
 
-
   // Filter for sections
   const happeningToday: ArticleUI[] = articles.slice(0, 5).map(mapArticle);
   const staffPicks: ArticleUI[] = articles.slice(0, 8).map(mapArticle);
@@ -119,14 +121,14 @@ const NewsSection = () => {
     })
     .map(mapArticle);
   const sportsPosts: ArticleUI[] = articles
-   .filter((article) => {
+    .filter((article) => {
       const attr = article.attributes || article;
       const catName = getCategoryName(attr.category);
       return catName.toLowerCase() === "sport";
     })
     .map(mapArticle);
 
-  if (loading) return <div className="text-white p-8">Loading articles...</div>;
+  // if (loading) return <div className="text-white p-8">Loading articles...</div>;
   if (error) return <div className="text-red-500 p-8">{error}</div>;
 
   // News Article Card Component
@@ -271,9 +273,14 @@ const NewsSection = () => {
                 Happening Today!
               </h2>
               <div>
-                {happeningToday.map((article) => (
-                  <NewsArticleCard key={article.id} article={article} />
-                ))}
+                {loading
+                  ? Array.from({ length: 6 }).map((_, index: number) => (
+                      <NewsArticleCardSkeleton key={index} />
+                    ))
+                  : happeningToday.map((article) => (
+                      <NewsArticleCard key={article.id} article={article} />
+                    ))}
+
                 {/* Read All Posts Button */}
                 <Link
                   href="/all-posts"
@@ -299,20 +306,43 @@ const NewsSection = () => {
             </div>
             {/* Technology Sections */}
             <div className="mt-2 md:ml-6">
-              <TechnologySection
-                title="What's Hot In Technology"
-                posts={technologyPosts}
-              />
-              <TechnologySection
-                title="What's hot in Sports"
-                posts={sportsPosts}
-                noBorder={true}
-              />
-              <TechnologySection
-                title="What's hot in Business"
-                posts={businessPosts}
-              />
-              
+              {loading ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 py-7">
+                  {Array.from({ length: 2 }).map((_, index: number) => (
+                    <TechnologySectionSkeleton key={index} />
+                  ))}
+                </div>
+              ) : (
+                <TechnologySection
+                  title="What's Hot In Technology"
+                  posts={technologyPosts}
+                />
+              )}
+              {loading ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 py-7">
+                  {Array.from({ length: 3 }).map((_, index: number) => (
+                    <TechnologySectionSkeleton key={index} />
+                  ))}
+                </div>
+              ) : (
+                <TechnologySection
+                  title="What's hot in Sports"
+                  posts={sportsPosts}
+                  noBorder={true}
+                />
+              )}
+              {loading ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 py-7">
+                  {Array.from({ length: 2 }).map((_, index: number) => (
+                    <TechnologySectionSkeleton key={index} />
+                  ))}
+                </div>
+              ) : (
+                <TechnologySection
+                  title="What's hot in Business"
+                  posts={businessPosts}
+                />
+              )}
             </div>
           </div>
           {/* Right Column - Staff Picks & Contributors */}
@@ -324,9 +354,17 @@ const NewsSection = () => {
                   Staff Picks
                 </h3>
                 <div className="space-y-4">
-                  {staffPicks.map((pick) => (
-                    <StaffPickCard key={pick.id} pick={pick} />
-                  ))}
+                  {loading ? (
+                    <div className="flex flex-col gap-1.5">
+                      {Array.from({ length: 5 }).map((_, index: number) => (
+                        <StafsPickSkeletonCard key={index} />
+                      ))}
+                    </div>
+                  ) : (
+                    staffPicks.map((pick) => (
+                      <StaffPickCard key={pick.id} pick={pick} />
+                    ))
+                  )}
                 </div>
               </div>
               {/* Top Contributors */}

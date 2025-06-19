@@ -8,6 +8,7 @@ import TopContributors from "./TopContributors";
 import SocialMediaLinks from "./SocialMediaLinks";
 import StafsPick from "./StafsPick";
 import { getCategoryColor } from "./NewsSection";
+import NewsArticleCardSkeleton from "./Skeleton/NewsArticleCard";
 
 // News Article Card Component
 const NewsArticleCard = ({ article }: { article: any }) => {
@@ -178,7 +179,7 @@ const NewsPageSection = () => {
     fetchData();
   }, []);
 
-  if (loading) return <div className="text-white p-8">Loading articles...</div>;
+
   if (error) return <div className="text-red-500 p-8">{error}</div>;
 
   return (
@@ -189,9 +190,18 @@ const NewsPageSection = () => {
           <div className="w-full lg:w-2/3 pt-12 px-4">
             <div className="md:pl-6">
               <div>
-                {articles.map((article) => (
+                {
+                  loading?(
+                       Array.from({ length: 6 }).map((_, index: number) => (
+                      <NewsArticleCardSkeleton key={index} />
+                    ))
+                  ):(
+                    articles.map((article) => (
                   <NewsArticleCard key={article.id} article={article} />
-                ))}
+                ))
+                  )
+                }
+                
 
                 {/* Load More Button */}
                 <button className="block w-full bg-[#444444] hover:bg-[#333333] text-white text-center py-4 mt-8">

@@ -7,6 +7,7 @@ import Newsletter from '@/components/Newsletter';
 import Image from 'next/image';
 import Link from 'next/link';
 import SocialMediaLinks from '@/components/SocialMediaLinks';
+import StafsPick from '@/components/StafsPick';
 
 // Helper to get category color
 function getCategoryColor(category: string) {
@@ -130,7 +131,7 @@ const articles = (data.data || []).map((article: any) => {
                 <h3 className="text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-4 sm:mb-6 uppercase">Staff Picks</h3>
                 {/* You can fetch staff picks from Strapi if needed */}
                 <div className="space-y-4">
-                  {/* ...existing code for staff picks... */}
+                 <StafsPick/>
                 </div>
               </div>
               <TopContributors />

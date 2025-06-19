@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import ContributorsSkeleton from "./Skeleton/ContributorsSkeleton";
 
 // Default contributors data
 const defaultContributors = [
@@ -85,7 +86,6 @@ const TopContributors: React.FC<TopContributorsProps> = ({
     .slice(0, 3)
     .map(mapContributer);
 
-  if (loading) return <div className="text-white p-8">Loading contributers...</div>;
   if (error) return <div className="text-red-500 p-8">{error}</div>;
 
 
@@ -100,7 +100,13 @@ const TopContributors: React.FC<TopContributorsProps> = ({
       </div>
       <div className="md:px-10 px-4 py-2">
         <div className="grid grid-cols-3 gap-2">
-          {contributerList.map((contributor) => (
+          {
+            loading?(
+              Array.from({length:3}).map((_,index:number)=>(
+                <ContributorsSkeleton key={index}/>
+              ))
+            ):(
+contributerList.map((contributor) => (
             <div key={contributor.id} className="text-center">
               <div className="relative w-full aspect-square">
                 <Image
@@ -118,7 +124,10 @@ const TopContributors: React.FC<TopContributorsProps> = ({
                 {contributor.role}
               </p>
             </div>
-          ))}
+          ))
+            )
+          }
+         
         </div>
       </div>
     </div>

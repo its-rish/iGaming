@@ -8,6 +8,7 @@ import Image from "next/image";
 import React from "react";
 import dumyImage from "../../../../public/assets/dumy1.webp";
 import SliderCard from "@/components/SliderCard";
+import StafsPick from "@/components/StafsPick";
 
 function index() {
   const bgColor = "#323476";
@@ -142,8 +143,8 @@ function index() {
                   Staff Picks
                 </h3>
                 {/* You can fetch staff picks from Strapi if needed */}
-                <div className="space-y-4">
-                  {/* ...existing code for staff picks... */}
+                 <div className="space-y-4">
+                 <StafsPick/>
                 </div>
               </div>
               <TopContributors />

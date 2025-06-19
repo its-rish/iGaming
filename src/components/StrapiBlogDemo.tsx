@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
+import CustomLoading from './Loading';
 
 const StrapiBlogDemo: React.FC = () => {
   const [blogs, setBlogs] = useState<any[]>([]);
@@ -15,7 +16,7 @@ const StrapiBlogDemo: React.FC = () => {
       });
   }, []);
 
-  if (loading) return <div>Loading articles...</div>;
+  if (loading) return <CustomLoading/>;
 
   return (
     <div className="p-4">
