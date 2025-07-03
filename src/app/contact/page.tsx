@@ -42,7 +42,7 @@ export default function Contact() {
       {/* Contact Form Section */}
       <div className="bg-black text-white py-16">
         <div className="container mx-auto px-6 md:px-16 lg:px-24">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Left Column - Contact Info */}
             <div>
               <h2 className="text-[#9CA53B] text-3xl font-medium mb-6">Don't Be Afraid To Say Hello With Us</h2>
@@ -96,7 +96,7 @@ export default function Contact() {
                 from you and let's start something special together.
               </p>
 
-              <form className="space-y-4">
+              <form className="space-y-4 bg-[#181818] lg:p-7.5 md:p-5">
                 <div>
                   <label htmlFor="name" className="block text-white mb-2">Name</label>
                   <input
