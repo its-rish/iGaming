@@ -35,10 +35,12 @@ export async function generateMetadata({
   };
 }
 
+
+
 export default async function CategoryPage({ params }: PageProps) {
   const { category } = await params;
   // Fetch articles by category
-  const res = await fetch(`https://capable-fellowship-a7bdacc8df.strapiapp.com/api/articles?filters[category][name][$eq]=${category}&populate=*`);
+  const res = await fetch(`https://harmonious-surprise-60a0828505.strapiapp.com/api/articles?filters[category][name][$eq]=${category}&populate=*`);
   const data = await res.json();
 
 
@@ -55,7 +57,7 @@ const articles = (data.data || []).map((article: any) => {
     category: article.category?.name || 'Unknown',
       imageUrl: imageUrl.startsWith('http')
         ? imageUrl
-        : `https://capable-fellowship-a7bdacc8df.media.strapiapp.com${imageUrl}`,
+        : `https://harmonious-surprise-60a0828505.media.strapiapp.com${imageUrl}`,
       link: `/article/${article.slug }`,
     };
   });

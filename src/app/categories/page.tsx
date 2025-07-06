@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 async function getCategoryArticles(category: string) {
   const res = await fetch(
-    `https://capable-fellowship-a7bdacc8df.strapiapp.com/api/articles?filters[category][name][$eq]=${category}&populate=*`
+    `https://harmonious-surprise-60a0828505.strapiapp.com/api/articles?filters[category][name][$eq]=${category}&populate=*`
   );
 
   if (!res.ok) return [];
@@ -35,7 +35,7 @@ async function getCategoryArticles(category: string) {
       date: article.date || article.publishedAt || '',
       imageUrl: imageUrl.startsWith('http')
         ? imageUrl
-        : `https://capable-fellowship-a7bdacc8df.media.strapiapp.com${imageUrl}`,
+        : `https://harmonious-surprise-60a0828505.media.strapiapp.com${imageUrl}`,
       link: `/article/${article.slug }`,
     };
   });

@@ -53,25 +53,6 @@ type FeaturedPost = {
 };
 
 
-// Sample related posts
-const sampleRelatedPosts = [
-  {
-    id: 3,
-    title: "Breakthrough AI Model Promises to Revolutionize Healthcare",
-    date: "DECEMBER 7, 2024",
-    imageUrl:
-      "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "/article/3",
-  },
-  {
-    id: 4,
-    title: "Global Stocks Surge as Markets React to Tech Sector Boom",
-    date: "DECEMBER 4, 2024",
-    imageUrl:
-      "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "/article/4",
-  },
-];
 
 // Sample featured post
 const sampleFeaturedPost = {
@@ -137,7 +118,7 @@ export async function generateMetadata({ params }: PageProps,
   try {
     // Try to fetch from Strapi first
     const res = await fetch(
-      `https://capable-fellowship-a7bdacc8df.strapiapp.com/api/articles?filters[slug][$eq]=${slug}&populate[imageUrl][fields][0]=url&populate[cover][fields][0]=url&populate[author][populate][profile][fields][0]=url&populate[category][populate][articles][populate][imageUrl][fields][0]=url&populate[category][populate][articles][populate][cover][fields][0]=url&populate[category][populate][articles][populate][author][populate][profile][fields][0]=url`
+      `https://harmonious-surprise-60a0828505.strapiapp.com/api/articles?filters[slug][$eq]=${slug}&populate[imageUrl][fields][0]=url&populate[cover][fields][0]=url&populate[author][populate][profile][fields][0]=url&populate[category][populate][articles][populate][imageUrl][fields][0]=url&populate[category][populate][articles][populate][cover][fields][0]=url&populate[category][populate][articles][populate][author][populate][profile][fields][0]=url`
     );
     const data = await res.json();
     const article = data.data?.[0];
@@ -168,7 +149,7 @@ export default async function ArticlePage({ params }: PageProps){
   try {
     // Try to fetch from Strapi first
     const res = await fetch(
-      `https://capable-fellowship-a7bdacc8df.strapiapp.com/api/articles?filters[slug][$eq]=${slug}&populate[imageUrl][fields][0]=url&populate[cover][fields][0]=url&populate[author][populate][profile][fields][0]=url&populate[category][populate][articles][populate][imageUrl][fields][0]=url&populate[category][populate][articles][populate][cover][fields][0]=url&populate[category][populate][articles][populate][author][populate][profile][fields][0]=url`,
+      `https://harmonious-surprise-60a0828505.strapiapp.com/api/articles?filters[slug][$eq]=${slug}&populate[imageUrl][fields][0]=url&populate[cover][fields][0]=url&populate[author][populate][profile][fields][0]=url&populate[category][populate][articles][populate][imageUrl][fields][0]=url&populate[category][populate][articles][populate][cover][fields][0]=url&populate[category][populate][articles][populate][author][populate][profile][fields][0]=url`,
       {
         next: { revalidate: 3600 },
       }
@@ -189,6 +170,7 @@ export default async function ArticlePage({ params }: PageProps){
     if (!article) return notFound();
 
     const attr = strapiArticle.attributes || (article as any);
+     const categorySlug = attr.category?.slug;
 
     const content = article.raw;
     // const content = (strapiArticle ? (attr.content || []) : article.content) || [];
@@ -211,7 +193,7 @@ export default async function ArticlePage({ params }: PageProps){
       : article.imageUrl;
 
     // Use sample data for related and featured posts for now
-    const relatedPosts = sampleRelatedPosts;
+  
     const featuredPost = sampleFeaturedPost;
 
     // Get category color
@@ -242,7 +224,32 @@ export default async function ArticlePage({ params }: PageProps){
         : ""
       : formatDate(article.date);
 
+let relatedPosts = [];
 
+  if (categorySlug) {
+   const relatedRes = await fetch(
+  `https://harmonious-surprise-60a0828505.strapiapp.com/api/articles?filters[category][slug][$eq]=${categorySlug}&filters[slug][$ne]=${slug}&populate=*`,
+  { next: { revalidate: 3600 } }
+);
+    const relatedJson = await relatedRes.json();
+    relatedPosts = relatedJson.data.map((article: any) => {
+    
+  const imgUrl = article.cover?.url || article.imageUrl?.url || "";
+  const imageUrl = imgUrl.startsWith("http")
+    ? imgUrl
+    : `https://harmonious-surprise-60a0828505.media.strapiapp.com${imgUrl}`;
+
+    console.log(article.title,'sadfsdfsdaf')
+
+  return {
+    id: article.id,
+    title: article.title,
+    date: formatDate(article.publishedAt),
+    imageUrl,
+    link: `/articles/${article.slug}`,
+  };
+});
+  }
 
     return (
       <>
@@ -317,9 +324,10 @@ export default async function ArticlePage({ params }: PageProps){
                   {/* Related Posts */}
                   <div>
                     <TechnologySection
-                      title="Related Articles"
+                      title="Sport"
                       posts={relatedPosts}
                       noBorder={true}
+                      
                     />
                   </div>
                 </div>

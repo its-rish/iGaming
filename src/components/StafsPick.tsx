@@ -83,7 +83,7 @@ function StafsPick() {
 
   useEffect(() => {
     fetch(
-      "https://capable-fellowship-a7bdacc8df.strapiapp.com/api/articles?populate[cover][fields][0]=url&populate[category][fields][0]=name&populate[category][populate][articles][fields][0]=documentId&populate[category][populate][articles][fields][1]=title&populate[category][populate][articles][fields][2]=slug&populate[category][populate][articles][fields][3]=date&populate[category][populate][articles][fields][4]=raw&populate[category][populate][articles][populate][imageUrl][fields][0]=url&populate[category][populate][articles][populate][cover][fields][0]=url&populate[category][populate][articles][populate][author][fields][0]=name&populate[category][populate][articles][populate][author][populate][profile][fields][0]=url"
+      "https://harmonious-surprise-60a0828505.strapiapp.com/api/articles?populate[cover][fields][0]=url&populate[category][fields][0]=name&populate[category][populate][articles][fields][0]=documentId&populate[category][populate][articles][fields][1]=title&populate[category][populate][articles][fields][2]=slug&populate[category][populate][articles][fields][3]=date&populate[category][populate][articles][fields][4]=raw&populate[category][populate][articles][populate][imageUrl][fields][0]=url&populate[category][populate][articles][populate][cover][fields][0]=url&populate[category][populate][articles][populate][author][fields][0]=name&populate[category][populate][articles][populate][author][populate][profile][fields][0]=url"
     )
       .then((res) => res.json())
       .then((data) => {

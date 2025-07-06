@@ -55,7 +55,7 @@ const TopContributors: React.FC<TopContributorsProps> = ({
   const [error, setError] = useState<string | null>(null);
   useEffect(() => {
     fetch(
-      "https://capable-fellowship-a7bdacc8df.strapiapp.com/api/authors?populate=*"
+      "https://harmonious-surprise-60a0828505.strapiapp.com/api/authors?populate=*"
     )
       .then((res) => res.json())
 

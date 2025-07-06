@@ -145,7 +145,7 @@ const NewsPageSection = () => {
     async function fetchData() {
       try {
         const res = await fetch(
-          "https://capable-fellowship-a7bdacc8df.strapiapp.com/api/articles?populate=*"
+          "https://harmonious-surprise-60a0828505.strapiapp.com/api/articles?populate=*"
         );
         const data = await res.json();
 

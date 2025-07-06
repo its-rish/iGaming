@@ -14,7 +14,7 @@ const Logo = () => {
     async function fetchLogo() {
       try {
          const res = await fetch(
-          'https://capable-fellowship-a7bdacc8df.strapiapp.com/api/global?populate=logo'
+          'https://harmonious-surprise-60a0828505.strapiapp.com/api/global?populate=logo'
         );
         const data = await res.json();
      

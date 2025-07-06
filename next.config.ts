@@ -24,7 +24,7 @@ const nextConfig: NextConfig = {
       },
         {
         protocol: 'https',
-        hostname: 'capable-fellowship-a7bdacc8df.media.strapiapp.com',
+        hostname: 'harmonious-surprise-60a0828505.media.strapiapp.com',
         pathname: '/**',
       },
     ],

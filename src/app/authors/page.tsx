@@ -43,7 +43,7 @@ export interface Author {
 
 async function getAuthors() {
   const res = await fetch(
-  "https://capable-fellowship-a7bdacc8df.strapiapp.com/api/authors?populate=*"
+  "https://harmonious-surprise-60a0828505.strapiapp.com/api/authors?populate=*"
   );
   if (!res.ok) return [];
   const data = await res.json();

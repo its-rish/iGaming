@@ -45,7 +45,7 @@ export default function About() {
   useEffect(() => {
     setLoading(true)
     fetch(
-      "https://capable-fellowship-a7bdacc8df.strapiapp.com/api/authors?populate=*"
+      "https://harmonious-surprise-60a0828505.strapiapp.com/api/authors?populate=*"
     )
       .then((res) => res.json())
       .then((data) => {
@@ -66,7 +66,7 @@ export default function About() {
 
       <div>
         <Image
-          src="https://capable-fellowship-a7bdacc8df.media.strapiapp.com/about_Banner_48f95b241b.jpg"
+          src="https://harmonious-surprise-60a0828505.media.strapiapp.com/about_Banner_7b72377297.jpg"
           alt="About Banner"
           width={1200}
           height={400}
@@ -276,7 +276,7 @@ export default function About() {
             {/* Team Member 1 */}
             {loading ? (
              Array.from({length:3}).map((_,index:number)=>(
-               <div className="animate-pulse flex items-center flex-col gap-4 bg-black w-full mx-auto">
+               <div key={index} className="animate-pulse flex items-center flex-col gap-4 bg-black w-full mx-auto">
                 <div className="bg-gray-700 h-64 w-full rounded-md "></div>
                 <div className="w-full max-w-10/12 text-center m-auto py-1.5 flex items-center flex-col">
                   <div className="h-3 w-full bg-gray-600 rounded mb-2"></div>
@@ -288,7 +288,7 @@ export default function About() {
               data &&
               data.map((author: autherProps) => {
                 const fallbackImage =
-                  "https://capable-fellowship-a7bdacc8df.media.strapiapp.com/about_Banner_48f95b241b.jpg";
+                  "https://harmonious-surprise-60a0828505.media.strapiapp.com/about_Banner_48f95b241b.jpg";
                 const imageUrl =
                   author?.profile?.formats?.small?.url ||
                   author?.profile?.url ||
