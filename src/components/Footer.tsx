@@ -50,27 +50,27 @@ const Footer = () => {
             <h3 className="text-2xl font-bold mb-4 mt-6 md:mt-0 font-inter">News Categories</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/technology" className="text-white hover:text-gray-300 transition-colors text-md font-inter">
+                <Link href="/categories/technology" className="text-white hover:text-gray-300 transition-colors text-md font-inter">
                   Technology
                 </Link>
               </li>
               <li>
-                <Link href="/business" className="text-white hover:text-gray-300 transition-colors text-md font-inter">
+                <Link href="/categories/business" className="text-white hover:text-gray-300 transition-colors text-md font-inter">
                   Business
                 </Link>
               </li>
               <li>
-                <Link href="/sport" className="text-white hover:text-gray-300 transition-colors text-md font-inter">
+                <Link href="/categories/sport" className="text-white hover:text-gray-300 transition-colors text-md font-inter">
                   Sport
                 </Link>
               </li>
               <li>
-                <Link href="/showbiz" className="text-white hover:text-gray-300 transition-colors text-md font-inter">
+                <Link href="/categories/showbiz" className="text-white hover:text-gray-300 transition-colors text-md font-inter">
                   Showbiz
                 </Link>
               </li>
               <li>
-                <Link href="/lifestyle" className="text-white hover:text-gray-300 transition-colors text-md font-inter">
+                <Link href="/categories/lifestyle" className="text-white hover:text-gray-300 transition-colors text-md font-inter">
                   Lifestyle
                 </Link>
               </li>

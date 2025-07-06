@@ -69,6 +69,7 @@ const articles = (data.data || []).map((article: any) => {
   const todaysUpdateText = categoryName.toUpperCase();
   const bgColor = "#B7386F";
   // Staff picks and contributors can be left as-is or fetched similarly
+  
   return (
     <>
       <TodaysUpdate text={todaysUpdateText} bgColor={bgColor} />

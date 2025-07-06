@@ -324,7 +324,7 @@ let relatedPosts = [];
                   {/* Related Posts */}
                   <div>
                     <TechnologySection
-                      title="Sport"
+                      title={`Related posts on ${categoryName}`}
                       posts={relatedPosts}
                       noBorder={true}
                       

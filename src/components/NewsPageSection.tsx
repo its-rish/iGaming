@@ -34,8 +34,8 @@ const NewsArticleCard = ({ article }: { article: any }) => {
           <div className="mb-1">
             <span
               className={`inline-block font-semibold uppercase ${getCategoryColor(
-                              article.category
-                            )}  text-sm font-inter`}
+                article.category
+              )}  text-sm font-inter`}
             >
               {article.category}
             </span>
@@ -92,8 +92,6 @@ const NewsArticleCard = ({ article }: { article: any }) => {
   );
 };
 
-
-
 interface StrapiArticle {
   id: number;
   attributes: {
@@ -141,6 +139,8 @@ const NewsPageSection = () => {
   const [staffPicks, setStaffPicks] = useState<ArticleUI[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const articlesPerPage = 6;
   useEffect(() => {
     async function fetchData() {
       try {
@@ -148,7 +148,6 @@ const NewsPageSection = () => {
           "https://harmonious-surprise-60a0828505.strapiapp.com/api/articles?populate=*"
         );
         const data = await res.json();
-
 
         const mapped = (article: StrapiArticle): ArticleUI => {
           const attr = article.attributes || (article as any);
@@ -178,7 +177,9 @@ const NewsPageSection = () => {
 
     fetchData();
   }, []);
-
+  const totalPages = Math.ceil(articles.length / articlesPerPage);
+  const startIdx = (currentPage - 1) * articlesPerPage;
+  const currentArticles = articles.slice(startIdx, startIdx + articlesPerPage);
 
   if (error) return <div className="text-red-500 p-8">{error}</div>;
 
@@ -190,25 +191,47 @@ const NewsPageSection = () => {
           <div className="w-full lg:w-2/3 pt-12 px-4">
             <div className="md:pl-6">
               <div>
-                {
-                  loading?(
-                       Array.from({ length: 6 }).map((_, index: number) => (
+                {loading
+                  ? Array.from({ length: 6 }).map((_, index: number) => (
                       <NewsArticleCardSkeleton key={index} />
                     ))
-                  ):(
-                    articles.map((article) => (
-                  <NewsArticleCard key={article.id} article={article} />
-                ))
-                  )
-                }
-                
+                  : currentArticles.map((article) => (
+                      <NewsArticleCard key={article.id} article={article} />
+                    ))}
 
                 {/* Load More Button */}
-                <button className="block w-full bg-[#444444] hover:bg-[#333333] text-white text-center py-4 mt-8">
-                  <span className="md:text-md lg:text-lg  uppercase font-anton">
-                    Load More
+
+                <div className="flex justify-center items-center mt-8 gap-4">
+                  <button
+                    onClick={() =>
+                      setCurrentPage((prev) => Math.max(prev - 1, 1))
+                    }
+                    disabled={currentPage === 1}
+                    className={`px-4 py-2 bg-[#444444] text-white hover:bg-[#333333] ${
+                      currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
+                    }`}
+                  >
+                    Prev
+                  </button>
+
+                  <span className="text-white">
+                    Page {currentPage} of {totalPages}
                   </span>
-                </button>
+
+                  <button
+                    onClick={() =>
+                      setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+                    }
+                    disabled={currentPage === totalPages}
+                    className={`px-4 py-2 bg-[#444444] text-white hover:bg-[#333333] ${
+                      currentPage === totalPages
+                        ? "opacity-50 cursor-not-allowed"
+                        : ""
+                    }`}
+                  >
+                    Next
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -222,7 +245,7 @@ const NewsPageSection = () => {
                   Staff Picks
                 </h3>
                 <div className="space-y-4">
-                 <StafsPick/>
+                  <StafsPick />
                 </div>
               </div>
 

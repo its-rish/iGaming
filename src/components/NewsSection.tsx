@@ -283,7 +283,7 @@ const NewsSection = () => {
 
                 {/* Read All Posts Button */}
                 <Link
-                  href="/all-posts"
+                  href="/news"
                   className="block w-full bg-[#ff5733] hover:bg-[#e04b2a] text-white text-center py-4 mt-8"
                 >
                   <span className="md:text-xl lg:text-xl  uppercase font-anton">
