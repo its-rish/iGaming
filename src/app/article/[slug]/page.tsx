@@ -11,6 +11,7 @@ import SocialMediaLinks from "@/components/SocialMediaLinks";
 import TechnologySection from "@/components/TechnologySection";
 import { gql, useQuery } from "@apollo/client";
 import Markdown from 'react-markdown'
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 // Types for our data structures
 type Author = {
@@ -249,8 +250,17 @@ let relatedPosts = [];
 });
   }
 
+  const bgColor = "#B7386F";
+
+    const navroute = [
+    { name: "categories", href: `/categories/${categoryName}` },
+    { name: "Article-details", href: "/categories/category-details" },
+  ];
+
     return (
       <>
+      <Breadcrumbs paths={navroute} bgColor={bgColor} />
+
         <div className="bg-black text-white">
           {/* Header with category and date */}
           <div className="container mx-auto mt-8 px-4 py-2">

@@ -19,7 +19,7 @@ function Breadcrumbs({ ...props }: IBreadcrumbsProps) {
 
   return (
     <div style={{ backgroundColor: `${props.bgColor}` }}>
-      <nav className="py-20 px-5" aria-label="Breadcrumb">
+      <nav className="lg:py-15 md:py-11 py-7 lg:px-5 md:px-4 px-2.5" aria-label="Breadcrumb">
         <ol className="flex flex-wrap items-center justify-center gap-2 ">
           {props.paths.map((path, index) => (
             <motion.li
@@ -36,13 +36,13 @@ function Breadcrumbs({ ...props }: IBreadcrumbsProps) {
               )}
               {index === props.paths.length - 1 ? (
               
-                  <span className="text-7xl inline-block font-normal text-white capitalize font-anton">
+                  <span className="lg:text-5xl md:text-4xl text-3xl inline-block font-normal text-white capitalize font-anton">
                     {path.name}
                   </span>
               ) : (
                 <Link
                   href={path.href}
-                  className="hover:text-[#89847A] inline-block text-7xl font-anton capitalize text-white font-normal transition-colors duration-200"
+                  className="hover:text-[#89847A] inline-block lg:text-5xl md:text-4xl text-3xl font-anton capitalize text-white font-normal transition-colors duration-200"
                 >
                   {path.name}
                 </Link>
