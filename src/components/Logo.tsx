@@ -44,7 +44,7 @@ const Logo = () => {
         width={150}
         height={80}
         priority
-        className=' h-full'
+        className=' h-full object-contain w-auto'
         style={{objectFit:"inherit"}}
         onError={() => setError(true)}
       />

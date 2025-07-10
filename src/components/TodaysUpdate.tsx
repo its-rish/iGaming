@@ -21,13 +21,13 @@ const TodaysUpdate: React.FC<TodaysUpdateProps> = ({
   return (
     <div className="w-full text-white relative" style={{ backgroundColor: bgColor }}>
       {/* Content */}
-      <div className="px-2 sm:px-4 relative z-10">
+      <div className="px-2 sm:px-4 py-2 relative z-10">
         {mounted && (
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-[15vw] sm:text-[15vw] md:text-[14vw] lg:text-[16vw] font-extrabold text-center uppercase font-anton"
+            className="text-5xl sm:text-[11vw] md:text-[12vw] lg:text-[16vw] font-normal leading-[1.1] text-center uppercase font-anton"
             style={{ width: '100%', overflowWrap: 'break-word' }}
           >
             {text}

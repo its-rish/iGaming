@@ -138,7 +138,7 @@ function index() {
           <div className="w-full lg:w-1/3">
             <div className="sticky top-15 bg-[#181818]">
               {/* Staff Picks */}
-              <div className="p-10 sm:px-10">
+              <div className="p-6 sm:px-10">
                 <h3 className="text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-4 sm:mb-6 uppercase">
                   Staff Picks
                 </h3>

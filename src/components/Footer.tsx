@@ -32,7 +32,7 @@ const Footer = () => {
             <div className="mb-4">
               <figure
                
-                className="object-contain mb-4 leading-0 h-20"
+                className="object-contain mb-4 leading-0 sm:h-20 h-15"
             >
               <Logo/>
             </figure>

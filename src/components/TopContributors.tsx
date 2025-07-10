@@ -91,9 +91,9 @@ const TopContributors: React.FC<TopContributorsProps> = ({
 
   return (
     <div className={className}>
-      <div className="md:px-10 px-4 pt-6">
+      <div className="md:px-10 px-4 md:pt-6 pt-2">
         <h3
-          className={`text-5xl sm:text-3xl md:text-5xl mb-4 uppercase font-anton ${titleClassName}`}
+          className={`text-3xl sm:text-3xl md:text-5xl mb-4 uppercase font-anton ${titleClassName}`}
         >
           Top Contributors
         </h3>

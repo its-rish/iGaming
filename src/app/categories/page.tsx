@@ -87,7 +87,7 @@ export default async function CategoryPage() {
           <div className="w-full lg:w-1/3">
             <div className="sticky top-15 bg-[#181818]">
               {/* Staff Picks */}
-              <div className="p-10 sm:px-10">
+              <div className="p-6 sm:px-10">
                 <h3 className="text-5xl sm:text-3xl md:text-3xl lg:text-5xl mb-4 sm:mb-6 uppercase font-anton">Staff Picks</h3>
                 {/* You can fetch staff picks from Strapi if needed */}
                 <div className="space-y-4">
