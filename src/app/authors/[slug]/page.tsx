@@ -8,6 +8,7 @@ import SocialMediaLinks from '@/components/SocialMediaLinks';
 import { Camera, MessageCircle, MessagesSquare, Video } from 'lucide-react';
 import { notFound } from 'next/navigation';
 
+
 async function getAuthorData(slug: string) {
   try {
     const res = await fetch(
@@ -16,7 +17,6 @@ async function getAuthorData(slug: string) {
     );
 
     if (!res.ok) {
-      console.error('Failed to fetch author:', res.status);
       return null;
     }
 
@@ -24,7 +24,6 @@ async function getAuthorData(slug: string) {
 
     return data.data[0] || null;
   } catch (err) {
-    console.error('Error fetching author:', err);
     return null;
   }
 }
@@ -39,15 +38,18 @@ async function getArticlesByAuthor(slug: string) {
 }
 
 
-export default async function AuthorDetailPage({ params }: { params: { slug: string } }) {
- const dynamicAuthor = await getAuthorData(params.slug);
-  const articles = await getArticlesByAuthor(params.slug);
- console.log(articles,'dynamicAuthor')
+interface PageProps {
+  params: Promise<{ slug: string }>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
+}
+export default async function AuthorDetailPage({ params }: PageProps) {
+  const { slug } = await params;
+ const dynamicAuthor = await getAuthorData(slug);
+  const articles = await getArticlesByAuthor(slug);
   if (!dynamicAuthor) {
     console.warn('Using fallback static author data.');
   }
   const authorData = dynamicAuthor ?? null;
-  console.log(authorData,'authordata')
   const authorname = authorData?.name;
   const authorrole = authorData?.jobTitle ;
   const authordescription = authorData?.jobDesc ;
@@ -57,10 +59,7 @@ export default async function AuthorDetailPage({ params }: { params: { slug: str
     ? profileUrl
     : profileUrl
     ? `https://capable-fellowship-a7bdacc8df.media.strapiapp.com${profileUrl}`:'';
- 
-
- 
-
+    
   return (
     <>
       <TodaysUpdate text="AUTHOR PROFILE" bgColor="#000000" />

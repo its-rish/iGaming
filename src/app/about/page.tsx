@@ -40,7 +40,6 @@ export default function About() {
   const [data, setData] = useState<autherProps[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
-  console.log(loading,'loading')
 
   useEffect(() => {
     setLoading(true)

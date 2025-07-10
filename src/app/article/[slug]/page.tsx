@@ -130,7 +130,6 @@ export async function generateMetadata({ params }: PageProps,
       description: "The requested article could not be found.",
     };
   } catch (error) {
-    console.error("Error fetching metadata:", error);
     return {
       title: "Error - Framagz",
       description: "An error occurred while fetching the article.",
@@ -239,7 +238,6 @@ let relatedPosts = [];
     ? imgUrl
     : `https://harmonious-surprise-60a0828505.media.strapiapp.com${imgUrl}`;
 
-    console.log(article.title,'sadfsdfsdaf')
 
   return {
     id: article.id,
@@ -380,7 +378,6 @@ let relatedPosts = [];
       </>
     );
   } catch (error) {
-    console.error(error, "error");
     return notFound();
   }
 }

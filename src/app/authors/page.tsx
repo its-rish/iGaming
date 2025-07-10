@@ -47,7 +47,6 @@ async function getAuthors() {
   );
   if (!res.ok) return [];
   const data = await res.json();
-  console.log("RAW author object:", JSON.stringify(data, null, 2));
   return data.data || [];
 }
 
@@ -56,7 +55,6 @@ export default async function AuthorsPage() {
   const authors = await getAuthors();
   const todaysUpdateText = "THE AUTHORS";
   const bgColor = "#000000";
-  console.log(authors, "authors");
   
   return (
     <>

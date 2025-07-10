@@ -26,7 +26,6 @@ const Logo = () => {
           setError(true);
         }
       } catch (err) {
-        console.error('Failed to load logo:', err);
         setError(true);
       }
     }
